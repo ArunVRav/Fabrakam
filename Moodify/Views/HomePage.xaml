@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Moodify.HomePage">
+  <StackLayout>
+    <Label Text="FABRAKAM FOODS" VerticalOptions="Start" HorizontalOptions="Center" FontSize= "50" TextColor="Red"/>
+    <Entry Text="youremail@place.com" Placeholder="e-mail" IsPassword="false"/>
+    <Entry  Placeholder="password" IsPassword="true"/>
+    <Button BorderColor="Black" Text="Log-in" BorderWidth="1000" BackgroundColor="White" BorderRadius="50" Clicked="logClicked"/>
+    <Button BorderColor="Red" Text="Sign-up" BorderWidth="100" BackgroundColor="Green"  Clicked="signClicked"/>
+    <Image Source="silverware.png"/>
+    <Label Text="Because parent's just don't understand." HorizontalTextAlignment="Center" />
+  </StackLayout>
+</ContentPage>

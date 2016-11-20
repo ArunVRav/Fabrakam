@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Moodify.SignUp">
+  <StackLayout>
+    <Label Text="Sign Up" VerticalOptions="Start" HorizontalOptions="Center" FontSize= "40"/>
+    <Label Text="Enter Email below"/>
+    <Entry Text="youremail@place.com" Placeholder="e-mail" IsPassword="false"/>
+    <Label Text="Enter Password below" />
+    <Entry  Placeholder="password" IsPassword="true"/>
+    <Label Text="Please repeat your password"/>
+    <Entry  Placeholder="password" IsPassword="true"/>
+    <Button BorderColor="Red" Text="Sign-up" BorderWidth="10" BackgroundColor="Green" Clicked="signClicked"/>
+  </StackLayout>
+</ContentPage>
