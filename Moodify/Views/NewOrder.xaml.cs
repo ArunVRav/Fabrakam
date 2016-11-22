@@ -1,27 +1,20 @@
-﻿using System;
+﻿using Moodify.DataModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Moodify
 {
     public partial class NewOrder : ContentPage
-    {
-        Dictionary<string, double> foods = new Dictionary<string, double>
-        {
-            //All the info for the menu
-            {"Hot Chips",2.50 },
-            {"Roast Potatoes",3.50 },
-            {"Vegatable Salad",2.00 },
-            {"Fruit Salad",2.00 },
-            {"Eggplant Parm",5.50 },
-            {"Veggie Burger",7.50 },
-            {"Strawberry Smoothies",5.00 }
-        };
+    {   
         public NewOrder()
         {
             InitializeComponent();
 
+            var foods = Menus.GetMenu();
+            var select = Menus.GetNumber();
             //Title
             Label header = new Label
             {
@@ -38,7 +31,7 @@ namespace Moodify
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            
+
 
             //Populate the picker
             foreach (string foodName in foods.Keys)
@@ -62,9 +55,6 @@ namespace Moodify
                 TextColor = Color.Black
             };
 
-            //Dictionary of Selected stuffs
-            Dictionary<string, int> select = new Dictionary<string, int>{ };
-
             //PriceLabel
             Label Price = new Label
             {
@@ -77,25 +67,32 @@ namespace Moodify
             //When the additem button is clicekd
             addItem.Clicked += (sender, args) =>
             {
-                string foodName = picker1.Items[picker1.SelectedIndex];
-                selected.Text = "";
-                double PriceTotal = 0;
-                if (select.ContainsKey(foodName))
+                if (picker1.SelectedIndex != -1)
                 {
-                    select[foodName]++;
+                    string foodName = picker1.Items[picker1.SelectedIndex];
+                    selected.Text = "";
+                    double PriceTotal = 0;
+                    if (select.ContainsKey(foodName))
+                    {
+                        select[foodName]++;
+                    }
+                    else
+                    {
+                        select.Add(foodName, 1);
+                    }
+                    //Adding text to both price and current order
+                    foreach (string food in select.Keys)
+                    {
+                        //As long as 1 or more of it is selected
+                        if (select[food] > 0)
+                        {
+                            selected.Text += food + " x" + select[food].ToString();
+                            selected.Text += "\n";
+                            PriceTotal += (select[food]) * (foods[food]);
+                        }
+                    }
+                    Price.Text = PriceTotal.ToString();
                 }
-                else
-                {
-                    select.Add(foodName, 1);
-                }
-                //Adding text to both price and current order
-                foreach (string food in select.Keys)
-                {
-                    selected.Text += food + " x" + select[food].ToString();
-                    selected.Text += "\n";
-                    PriceTotal += (select[food]) * (foods[food]);
-                }
-                Price.Text = PriceTotal.ToString();
             };
 
             //Button for saving and continuing with order
@@ -103,7 +100,56 @@ namespace Moodify
             {
                 Text = "ADD ORDER",
                 FontSize = 30,
-                BackgroundColor = Color.Blue
+                BackgroundColor = Color.Black,
+                TextColor = Color.White
+            };
+            finish.Clicked += (sender, args) =>
+            {
+                Orders order = new DataModels.Orders();
+                order.Price = 0;
+                foreach (string foodselected in select.Keys)
+                {
+                    switch (foodselected)
+                    {
+                        case "Hot Chips":
+                            order.HotChips = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        case "Roast Potatoes":
+                            order.RoastPotatoes = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        case "Vegetable Salad":
+                            order.VegetableSalad = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        case "Fruit Salad":
+                            order.FruitSalad = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        case "Eggplant Parm":
+                            order.EggplantParm = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        case "Veggie Burger":
+                            order.VeggieBurger = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        case "Strawberry Smoothies":
+                            order.Smoothie = select[foodselected];
+                            order.Price += select[foodselected] * foods[foodselected];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                AddOrder(order);
+                Price.Text = "0";
+
+                selected.Text = "";
+
+                Menus.PopulateCollection(select);
+                App.RootPage.Detail = new NavigationPage(new YourOrders());
             };
             this.Content = new StackLayout
             {
@@ -114,16 +160,17 @@ namespace Moodify
                     picker1,
                     addItem,
                     selected,
-                    Price
+                    Price,
+                    finish
                 }
             };
+        } 
+        private async void AddOrder(Orders order)
+        {
+            await AzureManager.AzureManagerInstanceOrders.AddOrder(order);
         }
-    }
-        //private void InitializeComponent()
-        //{
-        //    this.LoadFromXaml(typeof(NewOrder));
-        //}
-        
+
+    };      
+}
 
             
-}

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Moodify.DataModels;
 
 namespace Moodify
 {
@@ -15,8 +16,14 @@ namespace Moodify
         {
             InitializeComponent();
         }
-        void signClicked(object sender, EventArgs e)
+        public async void signClicked(object sender, EventArgs e)
         {
+            logins newLog = new DataModels.logins()
+            {
+                Email = email.Text,
+                Password = pass.Text
+            };
+            await AzureManager.AzureManagerInstanceLogins.AddLogin(newLog);
             App.RootPage.Detail = new NavigationPage(new YourOrders());
             App.RootPage.Master.IsVisible = true;
         }
