@@ -77,6 +77,11 @@ namespace Moodify
         {
             return await this.loginsTable.ToListAsync();
         }
+
+        public async Task UpdateOrder(Orders order)
+        {
+            await this.ordersTable.UpdateAsync(order);
+        }
     }
 
     

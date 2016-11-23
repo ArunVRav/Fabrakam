@@ -3,7 +3,9 @@
   <StackLayout>
     <Label Text="Sign Up" VerticalOptions="Start" HorizontalOptions="Center" FontSize= "40"/>
     <Label Text="Enter Email below"/>
-    <Entry Text="youremail@place.com" Placeholder="e-mail" IsPassword="false" x:Name ="email"/>
+    <Entry Placeholder="e-mail" IsPassword="false" x:Name ="email"/>
+    <Label Text="Enter your preferred name"/>
+    <Entry Text="" Placeholder="" IsPassword="false" x:Name ="Name"/>
     <Label Text="Enter Password below" />
     <Entry  Placeholder="password" IsPassword="true" x:Name ="pass"/>
     <Label Text="Please repeat your password"/>

@@ -21,7 +21,8 @@ namespace Moodify
             logins newLog = new DataModels.logins()
             {
                 Email = email.Text,
-                Password = pass.Text
+                Password = pass.Text,
+                PrefName = Name.Text
             };
             await AzureManager.AzureManagerInstanceLogins.AddLogin(newLog);
             App.RootPage.Detail = new NavigationPage(new YourOrders());

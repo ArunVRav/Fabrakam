@@ -22,7 +22,7 @@ namespace Moodify
             //All the info for the menu
             {"Hot Chips",2.50 },
             {"Roast Potatoes",3.50 },
-            {"Vegatable Salad",2.00 },
+            {"Vegetable Salad",2.00 },
             {"Fruit Salad",2.00 },
             {"Eggplant Parm",5.50 },
             {"Veggie Burger",7.50 },
@@ -31,7 +31,7 @@ namespace Moodify
         public static Dictionary<string, int> select = new Dictionary<string, int> {
             {"Hot Chips",0 },
             {"Roast Potatoes",0 },
-            {"Vegatable Salad",0 },
+            {"Vegetable Salad",0 },
             {"Fruit Salad",0 },
             {"Eggplant Parm",0 },
             {"Veggie Burger",0 },

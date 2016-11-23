@@ -20,31 +20,34 @@ namespace Moodify
         async void logClicked(object sender, EventArgs e)
         {
             var experiment = await AzureManager.AzureManagerInstanceLogins.GetLogins();
-            bool isWorking = false;
+            bool idDetected = false;
+            int indenter = -1;
             foreach (logins login in experiment)
             {
-                if(email.Text == login.Email)
+                indenter++;
+                if (email.Text == login.Email)
                 {
-                    if(Pass.Text != login.Password)
+                    if (Pass.Text != login.Password)
                     {
                         ErrorMsg.Text = "Sorry, your password doesn't match that of the email inputted";
+                        idDetected = true;
                         break;
-                    }else
+                    }
+                    else
                     {
-                        isWorking = true;
+                        logins.CurrentName = login.Email;
+                        logins.indexer = indenter;
+                        App.RootPage.Detail = new NavigationPage(new YourOrders());
+                        App.RootPage.Master.IsVisible = true;
                         break;
                     }
                 }
             }
-            if (isWorking == true)
-            {
-                App.RootPage.Detail = new NavigationPage(new YourOrders());
-                App.RootPage.Master.IsVisible = true;
-            }
-            else
+            if (idDetected != true)
             {
                 ErrorMsg.Text = "Sorry, that email has not been registered yet, go ahead and register!";
             }
         }
     }
 }
+

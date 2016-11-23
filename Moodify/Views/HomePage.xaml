@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Moodify.HomePage">
   <StackLayout>
-    <Label Text="FABRAKAM FOODS" VerticalOptions="Start" HorizontalOptions="Center" FontSize= "50" TextColor="Red"/>
+    <Label Text="FABRIKAM FOODS" VerticalOptions="Start" HorizontalOptions="Center" FontSize= "50" TextColor="Red"/>
     <Entry Text="youremail@place.com" Placeholder="e-mail" IsPassword="false" x:Name ="email"/>
     <Entry  Placeholder="password" IsPassword="true" x:Name="Pass"/>
     <Label Text="" HorizontalOptions="Center" FontSize="20" x:Name="ErrorMsg" />

@@ -9,8 +9,11 @@ namespace Moodify.DataModels
 {
     public class Orders
     {
-        [JsonProperty(PropertyName = "Id")]
+
         public string ID { get; set; }
+
+        [JsonProperty(PropertyName = "login")]
+        public string login1 { get; set; }
 
         [JsonProperty(PropertyName = "chips")]
         public int HotChips { get; set; }
@@ -32,12 +35,6 @@ namespace Moodify.DataModels
 
         [JsonProperty(PropertyName = "smoothie")]
         public int Smoothie { get; set; }
-
-        [JsonProperty(PropertyName = "login")]
-        public string loginID { get; set; }
-
-        [JsonProperty(PropertyName = "numberof")]
-        public int NumberOfOrders { get; set; }
 
         [JsonProperty(PropertyName = "Price")]
         public double Price { get; set; }

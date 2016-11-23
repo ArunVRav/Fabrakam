@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Moodify.YourOrders">
 	<StackLayout>
-		<Label Text="Your Orders" VerticalOptions="Start" HorizontalOptions="Center" />
+		<Label x:Name ="TopText" VerticalOptions="Start" HorizontalOptions="Center" />
     <ListView x:Name="ListView">
       <ListView.ItemTemplate>
         <DataTemplate>
@@ -11,12 +11,41 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
-              <Label Text="{Binding foodName}" FontSize="20" TextColor="Blue" Grid.Column="0"/>
-              <Label Text="{Binding noOrders}" Grid.Column="1" FontSize="30" TextColor="Olive"/>
-              <Label Text="$" FontSize="30" Grid.Column="2"/>
-              <Label Text="{Binding Price}" FontSize="30" TextColor="#ffa500" Grid.Column="3"/>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+              </Grid.RowDefinitions>
+              <Label Text ="Hot Chips" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="0"/>
+              <Label Text="{Binding HotChips}" Grid.Column="1" Grid.Row="0"/>
+              
+              
+              <Label Text ="Roast Potatoes" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="1"/>
+              <Label Text="{Binding RoastPotatoes}" Grid.Column="1" Grid.Row="1"/>
+              
+              <Label Text ="Vegtable Salad" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="2"/>
+              <Label Text="{Binding VegetableSalad}" Grid.Column="1" Grid.Row="2"/>
+              
+              <Label Text ="Fruit Salad" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="3"/>
+              <Label Text="{Binding FruitSalad}" Grid.Column="1" Grid.Row="3"/>
+              
+              <Label Text ="Egg Parm" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="4"/>
+              <Label Text="{Binding EggplantParm}" Grid.Column="1" Grid.Row="4"/>
+              
+              <Label Text ="Veggie Burger" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="5"/>
+              <Label Text="{Binding VeggieBurger}" Grid.Column="1" Grid.Row="5"/>
+              
+              <Label Text ="StrawberrySmoothie" FontSize="20" TextColor="Blue" Grid.Column="0" Grid.Row="6"/>
+              <Label Text="{Binding Smoothie}" Grid.Column="1" Grid.Row="6"/>
+
+              <Label Text="Price" Grid.Row="7" Grid.Column="1" />
+              <Label Text="{Binding Price}" Grid.Row="7" Grid.Column="2"/>
             </Grid>
           </ViewCell>
         </DataTemplate>
@@ -25,3 +54,4 @@
     <Button Text="Make Order!" Clicked="MakeOrder"/>
 	</StackLayout>
 </ContentPage>
+

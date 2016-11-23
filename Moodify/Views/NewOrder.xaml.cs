@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -103,10 +104,25 @@ namespace Moodify
                 BackgroundColor = Color.Black,
                 TextColor = Color.White
             };
+
+            Content = new StackLayout
+            {
+                Spacing = 0,
+                Children =
+                {
+                    header,
+                    picker1,
+                    addItem,
+                    selected,
+                    Price,
+                    finish
+                }
+            };
+
             finish.Clicked += (sender, args) =>
             {
                 Orders order = new DataModels.Orders();
-                order.Price = 0;
+                //order.Price = 0;
                 foreach (string foodselected in select.Keys)
                 {
                     switch (foodselected)
@@ -143,31 +159,18 @@ namespace Moodify
                             break;
                     }
                 }
-                AddOrder(order);
-                Price.Text = "0";
-
-                selected.Text = "";
-
-                Menus.PopulateCollection(select);
-                App.RootPage.Detail = new NavigationPage(new YourOrders());
+                AddTheOrder(order);
             };
-            this.Content = new StackLayout
-            {
-                Spacing = 0,
-                Children =
-                {
-                    header,
-                    picker1,
-                    addItem,
-                    selected,
-                    Price,
-                    finish
-                }
-            };
-        } 
-        private async void AddOrder(Orders order)
+        }
+        private async void AddTheOrder(Orders order)
         {
+            var loginList = await AzureManager.AzureManagerInstanceLogins.GetLogins();
+            int currIndex = logins.indexer;
+            string Email = loginList[3].Email;
             await AzureManager.AzureManagerInstanceOrders.AddOrder(order);
+            order.login1 = Email;
+            await AzureManager.AzureManagerInstanceOrders.UpdateOrder(order);
+            App.RootPage.Detail = new NavigationPage(new YourOrders());
         }
 
     };      
